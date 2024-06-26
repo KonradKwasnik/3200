@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+const fs = require('fs');
+const express = require('express');
+const app = express();
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Number of files to be created
+const numFiles = 3500; // replace with your desired number
+
+app.get('/', (req, res) => {
+    res.send('Static web app is running!');
+});
+
+app.listen(3000, () => {
+    console.log('App is listening on port 3000');
+    buildFiles(numFiles);
+});
+
+function buildFiles(num) {
+    for(let i = 1; i <= num; i++) {
+        const content = `<html><body><h1>This is file number ${i}</h1></body></html>`;
+        fs.writeFile(`./public/file${i}.html`, content, err => {
+            if(err) {
+                return console.log(err);
+            }
+            console.log(`file${i}.html was saved!`);
+        });
+    }
 }
-
-export default App;
