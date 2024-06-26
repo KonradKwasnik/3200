@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 // Number of files to be created
-const numFiles = 1000; // replace with your desired number
+const numFiles = 3500; // replace with your desired number
 
 app.get('/', (req, res) => {
     res.send('Static web app is running!');
